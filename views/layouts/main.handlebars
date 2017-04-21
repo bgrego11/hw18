@@ -31,7 +31,7 @@ $(document).on("click", ".add", function(e){
     };
     $.post("/comment", newCom).then(function(doc){
         console.log(doc);
-        $('#'+doc._id).append($('<div class="panel panel-default list-group-item"><div class="panel-heading"><h3 class="panel-title">'+doc.user+'</h3></div><div class="panel-body">'+doc.comment+' </div><span data-id='+doc._id+' class="glyphicon glyphicon-trash pull-right"></span></div>'))
+        $('#'+doc._id).append($('<div class="panel panel-default list-group-item"><div class="panel-heading"><h3 class="panel-title">'+doc.user+'</h3></div><div class="panel-body"><span class="glyphicon glyphicon-user pull-left"></span>'+doc.comment+'<span data-id='+doc._id+' class="glyphicon glyphicon-trash pull-right"></span> </div></div>'))
         $('#'+doc._id).show()
     })
   
