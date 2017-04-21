@@ -89,10 +89,10 @@ app.post('/comment', function (req, res) {
         {safe: true, upsert: true, new : true},
         function(err, model) {
             console.log(err);
-            return res.json(req.body)
         }
         
-    );
+    ).then(function(data) {
+        return res.json(data);
 
 });  
 
