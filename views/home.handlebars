@@ -1,0 +1,45 @@
+<div class="container-fluid">
+
+        {{#each articles}}
+        <div class="well col-sm-12 col-md-10 col-lg-10">
+            <a href="{{link}}">
+                <h1>{{title}}</h1>
+            </a>
+            <form action="/" method="POST" class="form-horizontal" role="form">
+                    <legend>Comment on this article</legend>
+                    <label for="input-id" class="col-sm-2">user</label>
+                    <input type="text" name="user" id="user" class="form-control" value="" required="required" pattern="" title="">
+                    
+                    <label for="input-id" class="col-sm-2">comment</label>
+                    <input type="text" name="id" id="comment" class="form-control" value="" required="required" pattern="" title="">
+                    
+                    <span class="input-group-btn">
+                        <button data-id={{_id}} type="button" class="btn btn-primary add">comment</button>
+                    </span>       
+            </form>
+            
+                <a data-id={{_id}} class="showCom"><small>Show Comments</small></a>
+                <div id={{_id}} class="list-group">
+                {{#each comments}}
+                <div id={{_id}} class="panel panel-default list-group-item">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-user pull-left"></span>{{ username}}<span class="glyphicon glyphicon-trash pull-right"></span></h3>
+                            
+                        </div>
+                        <div class="panel-body">
+                            {{body}}
+                        </div>
+                    </div>
+                    
+                {{/each}}
+            </div>
+        </div>
+        
+        {{/each}}
+    </div>
+
+  <a href="#" class="list-group-item active">
+    
+    <p class="list-group-item-text">...</p>
+  </a>
+</div>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News</title>
+    <link href="https://bootswatch.com/journal/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    {{{body}}}
+</body>
+<script>
+$(document).ready(function() {
+    $('.list-group').hide()
+})
+$(document).on("click", ".add", function(e){
+    e.preventDefault();
+    self = $(this)
+    var user = self.parent().parent().children('#user').val();
+    var comment = self.parent().parent().children('#comment').val();
+    const id = $(this).data('id') ;
+    var newCom = {
+        _id: id,
+        user: user,
+        comment: comment
+    };
+    $.post("/comment", newCom).then(function(doc){
+        console.log(doc);
+        $('#'+doc._id).append($('<div class="panel panel-default list-group-item"><div class="panel-heading"><h3 class="panel-title">'+doc.user+'</h3></div><div class="panel-body">'+doc.comment+' </div></div>'))
+        $('#'+doc._id).show()
+    })
+  
+    self.parent().parent().children('#user').val('');
+    self.parent().parent().children('#comment').val("");
+    
+})
+
+$(document).on("click", ".showCom", function(e){
+    e.preventDefault();
+    self = $(this)
+    com = $("#"+self.data('id'))
+
+    if (com.is(':visible')) {
+        com.hide()
+    } else {
+        com.show()
+    }
+})
+
+$(document).on("click", ".glyphicon-trash", function(e){
+    e.preventDefault();
+    self = $(this)
+    comId = $(this).parent().parent().parent().attr("id") 
+    artId =$(this).parent().parent().parent().parent().attr("id") 
+    delOb = {
+        art : artId,
+        comment: comId,
+    }
+   $.post("/delCom", delOb).then(function(){
+       $("#"+comId).remove()
+   })
+})
+</script>
+</html>
