@@ -16,8 +16,8 @@ var Article = require("./models/Article.js");
 // Initialize Express
 var app = express();
 
-// Use morgan and body parser with our app
-// app.use(logger("dev"));
+Use morgan and body parser with our app
+app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
